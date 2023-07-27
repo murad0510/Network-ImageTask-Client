@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network ImageTask Client", "Network ImageTask Client\Network ImageTask Client.csproj", "{9D3188E8-1988-4221-881F-D4AA2B7CCB05}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D3188E8-1988-4221-881F-D4AA2B7CCB05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D3188E8-1988-4221-881F-D4AA2B7CCB05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D3188E8-1988-4221-881F-D4AA2B7CCB05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D3188E8-1988-4221-881F-D4AA2B7CCB05}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E3C4892A-448A-4412-9D77-CE4DA09BADC7}
+	EndGlobalSection
+EndGlobal
