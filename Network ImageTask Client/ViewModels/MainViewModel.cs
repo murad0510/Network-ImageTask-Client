@@ -1,6 +1,8 @@
 ﻿using Network_ImageTask_Client.Commands;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -48,38 +50,65 @@ namespace Network_ImageTask_Client.ViewModels
                     //}
                     //BitmapImage filefoto = new BitmapImage();
                     //filefoto.UriSource = new Uri(filename);
+
+                    //var buffer = new byte[34000];
                     Image = filename;
                 }
             });
 
             SendButtonCommand = new RelayCommand((_) =>
             {
-                var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-                var ipAdress = IPAddress.Parse("192.168.0.109");
-                var port = 27001;
-
-                var ep = new IPEndPoint(ipAdress, port);
-
-                try
+                Task.Run(() =>
                 {
-                    socket.Connect(ep);
+                    var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-                    if (socket.Connected)
+                    var ipAdress = IPAddress.Parse("10.2.29.13");
+                    var port = 27014;
+
+                    var ep = new IPEndPoint(ipAdress, port);
+
+                    try
                     {
-                        while (true)
+                        socket.Connect(ep);
+
+                        if (socket.Connected)
                         {
                             var sendImage = Image;
-                            var bytes = Encoding.UTF8.GetBytes(sendImage);
+                            var bytes = Encoding.ASCII.GetBytes(sendImage);
                             socket.Send(bytes);
+
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"{ex.Message}");
-                }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"{ex.Message}");
+                    }
+                });
             });
         }
+        public string GetImagePath(byte[] buffer)
+        {
+            ImageConverter ic = new ImageConverter();
+            var data = ic.ConvertFrom(buffer);
+
+            Image img = data as Image;
+            if (img != null)
+            {
+                Bitmap bitmap1 = new Bitmap(img);
+
+                var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Images2");
+                Directory.CreateDirectory(path);
+                var strGuid = Guid.NewGuid().ToString();
+                bitmap1.Save($@"{path}\image{strGuid}.png");
+                var imagepath = $@"{path}\image{strGuid}.png";
+                return imagepath;
+            }
+            else
+            {
+                return String.Empty;
+            }
+
+        }
     }
+
 }
