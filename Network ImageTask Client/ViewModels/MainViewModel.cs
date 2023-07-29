@@ -39,8 +39,8 @@ namespace Network_ImageTask_Client.ViewModels
 
             SendButtonCommand = new RelayCommand((_) =>
             {
-                var ipAdress = IPAddress.Parse("10.2.27.3");
-                var port = 27034;
+                var ipAdress = IPAddress.Parse("192.168.0.109");
+                var port = 27001;
 
                 Task.Run(() =>
                 {
