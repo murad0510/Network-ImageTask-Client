@@ -51,7 +51,6 @@ namespace Network_ImageTask_Client.ViewModels
                         var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                         socket.Connect(ep);
 
-
                         if (socket.Connected)
                         {
                             var sendImage = Image;
@@ -69,15 +68,23 @@ namespace Network_ImageTask_Client.ViewModels
 
         public void File_send(object parametr)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.FileName = "Image";
-            dlg.DefaultExt = ".png";
-
-            if (dlg.ShowDialog() == true)
+            try
             {
-                Image = new BitmapImage(new Uri(dlg.FileName));
-                ImageBrush brush = new ImageBrush(Image);
-                //IsOkay = true;
+
+                Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                dlg.FileName = "Image";
+                dlg.DefaultExt = ".png";
+
+                if (dlg.ShowDialog() == true)
+                {
+                    Image = new BitmapImage(new Uri(dlg.FileName));
+                    ImageBrush brush = new ImageBrush(Image);
+                    //IsOkay = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
             }
         }
 
